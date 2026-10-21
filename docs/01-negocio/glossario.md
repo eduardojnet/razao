@@ -10,24 +10,34 @@ Código, API, eventos e documentação usam exatamente estes termos. Sigla nova 
 | Operador | Pessoa autenticada que registra, estorna e consulta em nome do comerciante. |
 | Gestor | Pessoa autenticada que consulta lançamentos e consolidado do comerciante, sem registrar nem estornar. |
 | Integrador | Sistema que chama a API em nome do comerciante, como uma frente de caixa. |
-| Lançamento | Registro imutável que altera o saldo do caixa: tipo, valor, data de competência, descrição e categoria opcional. |
-| Crédito | Lançamento que aumenta o saldo do caixa. |
-| Débito | Lançamento que reduz o saldo do caixa. |
-| Estorno | Lançamento de tipo oposto que anula um lançamento anterior e o referencia. Nunca apaga o original (RN-03). |
+| Lançamento | Registro imutável com duas partidas, uma a débito e uma a crédito, de mesmo valor, sempre com a conta Caixa em uma delas (RN-21, RN-24). Tem data de competência, descrição e categoria opcional. |
+| Partida | Cada um dos dois lados de um lançamento: a conta, o lado (débito ou crédito) e o valor. |
+| Plano de contas | Estrutura de contas do comerciante. Grupos sintéticos fixos (Ativo, Patrimônio Líquido, Receitas, Despesas) e contas analíticas criadas pelo comerciante dentro deles (RN-22). |
+| Conta analítica | Conta que recebe partidas. A conta Caixa, no grupo Ativo, existe para todo comerciante. |
+| Conta sintética | Grupo do plano de contas. Não recebe partida (I-09). |
+| Natureza da conta | Devedora (Ativo, Despesas): o débito aumenta o saldo. Credora (Patrimônio Líquido, Receitas): o crédito aumenta o saldo (RN-23). |
+| Contrapartida | A conta do outro lado do lançamento, oposta à conta Caixa. Numa venda, Receitas; num pagamento, Despesas. |
+| Crédito | Lado da partida que aumenta conta de natureza credora e reduz conta de natureza devedora. Na conta Caixa, o crédito reduz o saldo. |
+| Débito | Lado da partida que aumenta conta de natureza devedora e reduz conta de natureza credora. Na conta Caixa, o débito aumenta o saldo. |
+| Estorno | Lançamento que inverte as duas partidas de um lançamento anterior e o referencia. Nunca apaga o original (RN-03, I-03). |
 | Data de competência | Dia de negócio ao qual o lançamento pertence. Pode ser diferente da data de registro. |
 | Data de registro | Instante, com fuso, em que o sistema gravou o lançamento. Serve à auditoria. |
 | Dia de negócio | Dia civil no fuso America/Sao_Paulo, de 00:00 a 23:59:59 (RN-05). |
-| Saldo de abertura | Lançamento único por comerciante, com categoria "Saldo de abertura", que traz o dinheiro já existente em caixa no início do uso (RN-19). |
+| Saldo de abertura | Lançamento único por comerciante, com débito em Caixa e crédito em Patrimônio Líquido, que traz o dinheiro já existente em caixa no início do uso (RN-19). |
 | Saldo inicial do dia | Saldo final do dia de negócio anterior. |
-| Movimento do dia | Total de créditos menos total de débitos do dia. |
+| Movimento do dia | Débitos em Caixa menos créditos em Caixa no dia. |
 | Saldo final do dia | Saldo inicial mais movimento do dia. |
-| Consolidado diário | Visão derivada por dia: saldo inicial, créditos, débitos, saldo final e quantidade de lançamentos. |
+| Consolidado diário | Projeção diária da conta Caixa: saldo inicial, débitos, créditos, saldo final e quantidade de lançamentos (RN-06). |
 | Lançamento retroativo | Lançamento com data de competência anterior ao dia atual. Obriga recalcular o dia afetado e os seguintes (RN-07). |
 | Chave de idempotência | Identificador enviado pelo integrador que garante que a mesma operação, reenviada, gera um único lançamento (RN-10). |
 
 ### Convenção de crédito e débito
 
-Hoje vale a definição acima, a mesma do handoff: crédito aumenta o saldo do caixa e débito reduz, como num extrato. Com a adoção de partidas dobradas (ADR-0012), essa convenção passa pela revisão contábil, em que o débito na conta Caixa aumenta o saldo. A troca entra num PR próprio, junto com o novo nome do campo de tipo da API.
+Crédito e débito têm um único sentido no RAZÃO: o contábil. Decidi em 20/10/2026, com a adoção de partidas dobradas (ADR-0012), substituindo a visão de extrato do handoff original, em que crédito aumentava o caixa.
+
+Na conta Caixa, de natureza devedora, o débito aumenta o saldo e o crédito reduz. Uma venda é débito em Caixa e crédito em Receitas. Um pagamento a fornecedor é débito em Despesas e crédito em Caixa.
+
+A API não tem campo de tipo. O registro de lançamento recebe a conta de débito (`contaDebito`) e a conta de crédito (`contaCredito`), e os totais do consolidado diário são os débitos e os créditos da conta Caixa nesse mesmo sentido.
 
 ## Termos proibidos
 
@@ -36,7 +46,9 @@ Hoje vale a definição acima, a mesma do handoff: crédito aumenta o saldo do c
 | transação, movimentação, movimento (como substantivo do lançamento) | lançamento |
 | cancelamento, exclusão, edição, ajuste | estorno |
 | entrada, saída (como termo técnico) | crédito, débito |
-| valor positivo, valor negativo | o tipo do lançamento (RN-01) |
+| valor positivo, valor negativo | o lado da partida (RN-01) |
+| tipo do lançamento, CRÉDITO/DÉBITO como tipo | conta de débito e conta de crédito |
+| crédito ou débito no sentido de extrato bancário | crédito ou débito no sentido contábil |
 | "data" sem qualificação | data de competência ou data de registro |
 | "saldo" sem qualificação | saldo inicial, movimento do dia ou saldo final |
 | dia UTC, "dia" sem fuso | dia de negócio |
