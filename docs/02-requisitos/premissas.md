@@ -18,4 +18,16 @@ Revisão de Eduardo José Gonçalves do Carmo, 20/10/2026.
 
 ## Premissas do Arquiteto
 
-Nenhuma ainda. Cada nova premissa entra aqui com a data e o nome de quem decidiu.
+Cada nova premissa entra aqui com a data e o nome de quem decidiu.
+
+### P-01: o recálculo de dia passado faz parte do Must
+
+Decidida por Eduardo José Gonçalves do Carmo, 20/10/2026.
+
+O estorno herda a data de competência do original (RN-15), e o estorno (US-03) é Must. Estornar hoje um lançamento de ontem muda o saldo final de ontem e de todos os dias seguintes. Por isso o Consolidado precisa recalcular dia passado mesmo que o lançamento retroativo do comerciante (US-08, RN-07) seja cortado no G2.
+
+O corte da US-08 tira só a possibilidade de o comerciante registrar um lançamento novo com data passada. O mecanismo de recálculo continua no Must.
+
+Custo aceito: o consumidor do Consolidado nasce imune à ordem dos eventos desde o primeiro dia (C-04), em vez de começar pela versão mais simples, que só soma no dia corrente.
+
+Como medimos: o teste de referência do handoff, com o estorno do débito de R$ 100,00 de 20/10 registrado em 22/10 e o saldo final de R$ 1.650,00.
