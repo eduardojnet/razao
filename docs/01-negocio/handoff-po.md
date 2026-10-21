@@ -987,3 +987,5 @@ Decisão de Eduardo José Gonçalves do Carmo. Amplia o escopo: o plano de conta
 | I-09 | Partida só existe em conta analítica ativa do plano do próprio comerciante. Conta sintética não recebe partida. |
 
 O exemplo de cálculo de referência não muda: o saldo final da conta Caixa em 22/10 continua R$ 1.650,00.
+
+Com crédito e débito no sentido contábil (convenção no glossário), as colunas do exemplo trocam de nome na conta Caixa: a coluna "Créditos" passa a ser lida como débitos em Caixa e a coluna "Débitos" como créditos em Caixa. Em 19/10, por exemplo, são R$ 1.000,00 de débitos e R$ 300,00 de créditos em Caixa. Os valores e os saldos não mudam.
