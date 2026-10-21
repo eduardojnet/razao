@@ -1,6 +1,6 @@
 # ADR-0010: Estratégia de testes, com Locust na carga
 
-Status: aceita para o Locust; proposta para as demais ferramentas
+Status: aceita
 Data: 2026-10-20
 Regras e requisitos afetados: RNF-14, US-10, US-11
 
@@ -12,10 +12,10 @@ O enunciado exige testes automatizados. O PO exige prova executável dos dois NF
 
 | Tipo | O que prova | Ferramenta |
 | --- | --- | --- |
-| Unitário de domínio | RN, I e C, sem infraestrutura | pytest (proposta) |
-| Integração | API, banco e mensageria reais | pytest com contêineres descartáveis (proposta) |
-| Contrato | Compatibilidade de API e eventos | Validação dos esquemas OpenAPI e de evento (proposta) |
-| Resiliência | NFR 1 | pytest parando contêineres do Docker Compose (proposta) |
+| Unitário de domínio | RN, I e C, sem infraestrutura | pytest |
+| Integração | API, banco e mensageria reais | pytest com contêineres descartáveis |
+| Contrato | Compatibilidade de API e eventos | Validação dos esquemas OpenAPI e de evento |
+| Resiliência | NFR 1 | pytest parando contêineres do Docker Compose |
 | Carga | NFR 2 | Locust (aceita) |
 
 Todo teste de regra leva o código no nome, por exemplo `test_i04_estorno_unico_sob_concorrencia`. Os roteiros e os resultados ficam em `testes/carga` e `testes/resiliencia`.

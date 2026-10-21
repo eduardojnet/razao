@@ -1,6 +1,6 @@
 # ADR-0004: Leitura do consolidado a partir da projeção pré-calculada, com cache
 
-Status: proposta
+Status: aceita
 Data: 2026-10-20
 Regras e requisitos afetados: RNF-02, RNF-05, SLO-02
 
@@ -10,7 +10,7 @@ O consolidado diário precisa sustentar 50 leituras por segundo com pelo menos 9
 
 ## Decisão
 
-Proponho servir a leitura da projeção já calculada no banco do Consolidado (ADR-0003): a consulta de um dia é a leitura de uma linha pela chave comerciante e data. Na frente dela, um cache Redis por comerciante e dia, invalidado na mesma operação que aplica o evento.
+Decidimos servir a leitura da projeção já calculada no banco do Consolidado (ADR-0003): a consulta de um dia é a leitura de uma linha pela chave comerciante e data. Na frente dela, um cache Redis por comerciante e dia, invalidado na mesma operação que aplica o evento.
 
 Com o cache frio, a leitura vai direto ao banco pela chave primária, que é o mesmo caminho de antes do cache existir. O cache reduz carga; não é condição para a leitura funcionar.
 
