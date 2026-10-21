@@ -968,7 +968,7 @@ Decisão de Eduardo José Gonçalves do Carmo. Amplia o escopo: o plano de conta
 | RN-21 | Todo lançamento tem exatamente duas partidas: uma a débito e uma a crédito, de mesmo valor, em contas analíticas diferentes do plano do comerciante. |
 | RN-22 | O plano de contas tem grupos sintéticos fixos, iguais para todos os comerciantes: Ativo, Patrimônio Líquido, Receitas e Despesas. A conta analítica Caixa, no grupo Ativo, existe para todo comerciante. O comerciante cria as demais contas analíticas dentro dos grupos. |
 | RN-23 | Ativo e Despesas têm natureza devedora: o débito aumenta o saldo. Patrimônio Líquido e Receitas têm natureza credora: o crédito aumenta o saldo. |
-| RN-24 | Proposta, aguardando confirmação do PO: todo lançamento movimenta a conta Caixa em uma das duas partidas, para que o consolidado diário continue sendo o retrato do caixa. |
+| RN-24 | Todo lançamento movimenta a conta Caixa em uma das duas partidas, para que o consolidado diário continue sendo o retrato do caixa. Confirmada pelo PO em 20/10/2026. Lançamento sem Caixa, como reclassificação entre despesas, fica como evolução. |
 
 **Regras com nova redação**
 
