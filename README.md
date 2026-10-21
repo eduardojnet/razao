@@ -34,7 +34,9 @@ O controle de lançamento não depende de nenhum outro serviço no ar para regis
 
 ## Decisões
 
-<!-- A preencher. -->
+O registro de lançamento não depende de nenhum outro serviço no ar: são três microsserviços (Lançamentos, Consolidado e Plano de Contas) que se falam só por eventos no Kafka, com outbox transacional para que nenhum lançamento confirmado fique sem evento ([ADR-0001](docs/04-adr/0001-estilo-arquitetural.md), [ADR-0002](docs/04-adr/0002-outbox-transacional.md)). O livro de lançamentos usa partidas dobradas com plano de contas, e o consolidado diário é a projeção da conta Caixa ([ADR-0012](docs/04-adr/0012-partidas-dobradas.md)). O consumidor do consolidado é imune à ordem e à duplicidade dos eventos, o que cobre o estorno de dia passado ([ADR-0003](docs/04-adr/0003-consumidor-ordem-retroativo.md)).
+
+Todas as decisões, com alternativas descartadas e forma de prova, estão no [índice das ADRs](docs/04-adr/README.md).
 
 ## Limitações conhecidas
 
