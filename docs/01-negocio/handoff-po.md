@@ -952,3 +952,38 @@ O maior risco não é técnico: é gastar o tempo do teste em sofisticação e d
 | Devolver desenho alvo, contratos e ADRs v1 | Arquiteto | Até 21/10 11:00 | Aceito |
 | Validar no G1 contra a matriz e as premissas | PO | 21/10 12:00 | Aceito |
 | Implementar na ordem da priorização | Arquiteto | A partir do G1 aprovado | Aceito |
+
+## Registro de alterações
+
+O texto acima é a versão original de 20/10/2026 e não é editado. Cada alteração entra aqui, datada, e prevalece sobre o trecho que substitui. É o mesmo princípio do livro de lançamentos: corrige-se por cima, sem apagar o original.
+
+### 20/10/2026: escrituração por partidas dobradas com plano de contas
+
+Decisão de Eduardo José Gonçalves do Carmo. Amplia o escopo: o plano de contas, antes fora de escopo, entra no MVP. Se o prazo não comportar, o escopo recua primeiro para um plano fixo mínimo e depois para a conta Caixa única, nos portões G1 e G2.
+
+**Regras novas**
+
+| Código | Regra |
+| --- | --- |
+| RN-21 | Todo lançamento tem exatamente duas partidas: uma a débito e uma a crédito, de mesmo valor, em contas analíticas diferentes do plano do comerciante. |
+| RN-22 | O plano de contas tem grupos sintéticos fixos, iguais para todos os comerciantes: Ativo, Patrimônio Líquido, Receitas e Despesas. A conta analítica Caixa, no grupo Ativo, existe para todo comerciante. O comerciante cria as demais contas analíticas dentro dos grupos. |
+| RN-23 | Ativo e Despesas têm natureza devedora: o débito aumenta o saldo. Patrimônio Líquido e Receitas têm natureza credora: o crédito aumenta o saldo. |
+| RN-24 | Proposta, aguardando confirmação do PO: todo lançamento movimenta a conta Caixa em uma das duas partidas, para que o consolidado diário continue sendo o retrato do caixa. |
+
+**Regras com nova redação**
+
+| Código | Nova redação |
+| --- | --- |
+| RN-01 | Todo lançamento tem duas partidas (RN-21), valor estritamente positivo, data de competência e descrição. O efeito no saldo vem da natureza da conta e do lado da partida, nunca do sinal do valor. |
+| RN-06 | O consolidado diário é a projeção da conta Caixa: saldo inicial, mais os débitos em Caixa do dia, menos os créditos em Caixa do dia. Os nomes dos campos do consolidado e o campo de tipo da API são revistos junto com a convenção de crédito e débito. |
+| RN-19 | O saldo de abertura é um lançamento com débito em Caixa e crédito numa conta de Patrimônio Líquido, na data de início de uso. |
+
+**Invariantes novas e alteradas**
+
+| Código | Invariante |
+| --- | --- |
+| I-03 | O estorno inverte as duas partidas do original: mesmas contas, lados trocados, mesmo valor, mesmo comerciante. |
+| I-08 | Em todo lançamento, a soma dos débitos é igual à soma dos créditos. |
+| I-09 | Partida só existe em conta analítica ativa do plano do próprio comerciante. Conta sintética não recebe partida. |
+
+O exemplo de cálculo de referência não muda: o saldo final da conta Caixa em 22/10 continua R$ 1.650,00.
