@@ -1,6 +1,6 @@
 # ADR-0003: Consumidor imune à ordem e à duplicidade, com recálculo de dia passado
 
-Status: proposta
+Status: aceita
 Data: 2026-10-20
 Regras e requisitos afetados: RF-06, RF-09, RN-07, RN-15, C-01, C-02, C-04
 
@@ -10,7 +10,7 @@ Os eventos chegam pelo menos uma vez e podem chegar fora de ordem. O estorno de 
 
 ## Decisão
 
-Proponho que o Consolidado aplique cada evento numa única transação que:
+Decidimos que o Consolidado aplica cada evento numa única transação que:
 
 1. registra o identificador do evento numa tabela de eventos aplicados, com chave única; se já existir, o evento é ignorado (C-04);
 2. soma o valor da partida em Caixa ao total de débitos ou de créditos do dia de competência;

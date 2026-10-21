@@ -1,6 +1,6 @@
 # ADR-0011: O que fica de fora da entrega de sexta
 
-Status: proposta, atualizada no G2
+Status: aceita, atualizada no G2
 Data: 2026-10-20
 Regras e requisitos afetados: US-08, US-12, US-13, US-17
 

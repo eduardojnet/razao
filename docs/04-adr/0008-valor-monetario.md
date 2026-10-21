@@ -1,6 +1,6 @@
 # ADR-0008: Valor monetário em decimal exato, trafegado como texto
 
-Status: proposta
+Status: aceita
 Data: 2026-10-20
 Regras e requisitos afetados: RN-01, RN-02, RN-17
 
@@ -10,7 +10,7 @@ Valores em reais, com duas casas, em aritmética exata. Ponto flutuante é proib
 
 ## Decisão
 
-Proponho:
+Decidimos:
 
 - no código, `decimal.Decimal` com duas casas;
 - no banco, coluna `NUMERIC(14,2)`, que cobre com folga o teto de R$ 1.000.000,00 (RN-17);
