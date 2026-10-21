@@ -989,3 +989,15 @@ Decisão de Eduardo José Gonçalves do Carmo. Amplia o escopo: o plano de conta
 O exemplo de cálculo de referência não muda: o saldo final da conta Caixa em 22/10 continua R$ 1.650,00.
 
 Com crédito e débito no sentido contábil (convenção no glossário), as colunas do exemplo trocam de nome na conta Caixa: a coluna "Créditos" passa a ser lida como débitos em Caixa e a coluna "Débitos" como créditos em Caixa. Em 19/10, por exemplo, são R$ 1.000,00 de débitos e R$ 300,00 de créditos em Caixa. Os valores e os saldos não mudam.
+
+### 20/10/2026: critério de recuo das partidas dobradas nos portões
+
+Plano B da alteração anterior. O recuo é automático quando o gatilho dispara, sem nova discussão.
+
+| Portão | Gatilho | Recuo |
+| --- | --- | --- |
+| G1, 21/10 12:00 | O desenho com plano de contas completo não fecha os itens 1 a 6 dos critérios de revisão | Plano fixo mínimo: Caixa, Patrimônio Líquido, Receitas e Despesas, sem contas criadas pelo comerciante; a contrapartida sai da categoria |
+| G2, 22/10 12:00 | Validação de partidas e plano de contas sem testes verdes junto com os demais itens Must | Plano fixo mínimo, se ainda não aplicado |
+| G2, 22/10 12:00 | O plano fixo mínimo também sem testes verdes | Conta Caixa única, como no handoff original; partidas dobradas viram evolução |
+
+Em qualquer recuo, o saldo da conta Caixa e o teste de referência continuam valendo, porque o consolidado diário sempre foi a projeção do caixa.
